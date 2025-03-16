@@ -1,0 +1,10 @@
+google-cloud-storage
+google-cloud-bigquery
+google-auth
+pandas
+numpy
+dbt-bigquery
+apache-airflow
+apache-airflow-providers-google
+pyyaml
+dotenv

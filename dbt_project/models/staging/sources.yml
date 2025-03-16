@@ -1,0 +1,16 @@
+version: 2
+
+sources:
+  - name: order_ad_data
+    description: "Raw data loaded from Google Cloud Storage"
+    database: atomic-sled-453015-g3
+    schema: order_ad_data
+
+    tables:
+      - name: clean_shopify_orders  # BigQuery table name for clean Shopify orders data
+        description: "Shopify orders data, cleaned and loaded into BigQuery"
+        identifier: clean_shopify_orders
+
+      - name: clean_facebook_ads  # BigQuery table name for clean Facebook Ads data
+        description: "Facebook Ads insights, cleaned and loaded into BigQuery"
+        identifier: clean_facebook_ads
