@@ -7,6 +7,6 @@ SELECT
     total_price_eur,
     discount_code,
     status
-FROM {{ source('order_ad_data', 'clean_shopify_orders') }}  -- ✅ Matches `sources.yml`
+FROM {{ source('order_ad_data', 'clean_shopify_orders') }}
 WHERE total_price_eur > 0
 
