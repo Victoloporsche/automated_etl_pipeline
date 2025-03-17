@@ -90,6 +90,8 @@ def replace_missing_values(df:pd.DataFrame,
                 df[column] = df[column].fillna('NONE')
             elif dtype in ['float64', 'float32']:
                 df[column] = df[column].fillna(0.0)
+            elif dtype in ['int64', 'int32']:
+                df[column] = df[column].fillna(0)
             else:
                 logger.error(f"Unhandled type {dtype} for column {column}")
     return df
