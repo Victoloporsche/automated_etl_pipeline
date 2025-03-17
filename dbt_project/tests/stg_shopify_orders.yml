@@ -1,39 +1,34 @@
 version: 2
 
 models:
-  - name: stage_shopify_order
+  - name: stg_shopify_orders
     description: "Staging model for Shopify orders with basic cleaning and filtering."
     columns:
       - name: order_id
         description: "Unique identifier for the order."
         tests:
           - unique:
-              severity: error  # Ensures no duplicate order_ids
+              severity: error
           - not_null:
-              severity: error  # Ensures order_id is always populated
+              severity: error
 
       - name: customer_id
         description: "Identifier for the customer who placed the order."
         tests:
           - not_null:
-              severity: error  # Ensures every order has a customer_id
+              severity: error
 
       - name: order_date
-        description: "Date the order was placed."
         tests:
-          - not_null:
-              severity: error  # Ensures order_date is always populated
-          - dbt_utils.recent_date:
+          - not_null
+          - recent_date:
+              days: 365
               severity: warn
-              days: 365       # Warns if order_date is older than 1 year
 
       - name: total_price_eur
-        description: "Total price of the order in EUR."
         tests:
-          - not_null:
-              severity: error  # Ensures total_price_eur is always populated
-          - dbt_utils.expression_is_true:
-              expression: "total_price_eur > 0"  # Validates the WHERE clause in the model
+          - not_null
+          - custom_positive_total_price:
               severity: error
 
       - name: discount_code
@@ -41,13 +36,13 @@ models:
         tests:
           - accepted_values:
               severity: warn
-              values: [null, 'SUMMER10', 'WINTER20', 'FREESHIP']  # Example list; adjust to your valid codes
+              values: [null, 'SUMMER10', 'WINTER20', 'FREESHIP']
 
       - name: status
         description: "Current status of the order."
         tests:
           - not_null:
-              severity: error  # Ensures status is always populated
+              severity: error
           - accepted_values:
               severity: error
-              values: ['pending', 'fulfilled', 'cancelled', 'shipped']  # Adjust to your valid statuses
+              values: ['pending', 'refunded', 'canceled', 'shipped', 'paid']

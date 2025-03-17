@@ -153,12 +153,14 @@ def preprocess_and_upload_to_gcs(shopify: pd.DataFrame,
         logger.error(f"Error uploading clean data to GCS: {e}")
         raise UploadToGCSFailedError
 
+# Define a function called save_to_gcs
 def save_to_gcs():
+    # Call the preprocess_and_upload_to_gcs function and pass in the shopify_df and facebook_df variables
     preprocess_and_upload_to_gcs(shopify_df, facebook_df)
 
 
 if __name__ == "__main__":
-    preprocess_and_upload_to_gcs(shopify_df, facebook_df)
+    save_to_gcs()
 
 
 

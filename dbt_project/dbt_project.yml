@@ -28,7 +28,7 @@ models:
 
     fact_tables:
       +schema: analytics
-      +materialized: incremental  # Incremental materialization defined here
+      +materialized: incremental
 
 dispatch:
   - macro_namespace: dbt
