@@ -10,3 +10,9 @@
     FROM {{ model }}
     WHERE {{ column_name }} < DATE_SUB(CURRENT_DATE(), INTERVAL {{ days }} DAY)
 {% endtest %}
+
+{% test greater_than_or_equal_to(model, column_name, value) %}
+    SELECT *
+    FROM {{ model }}
+    WHERE {{ column_name }} < {{ value }}
+{% endtest %}

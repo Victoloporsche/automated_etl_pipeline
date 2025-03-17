@@ -1,0 +1,33 @@
+version: 2
+
+models:
+  - name: stg_facebook_ads
+    description: "Staging model for cleaned Facebook ads data"
+    columns:
+      - name: campaign_id
+        description: "Unique identifier for the ad campaign"
+        tests:
+          - not_null
+      - name: ad_date
+        description: "Date the ad started"
+        tests:
+          - not_null
+
+      - name: impressions
+        description: "Number of times the ad was viewed"
+        tests:
+          - not_null
+          - greater_than_or_equal_to:
+              value: 0
+      - name: clicks
+        description: "Number of clicks on the ad"
+        tests:
+          - not_null
+          - greater_than_or_equal_to:
+              value: 0
+      - name: spend_eur
+        description: "Ad spend in EUR"
+        tests:
+          - not_null
+          - greater_than_or_equal_to:
+              value: 0
